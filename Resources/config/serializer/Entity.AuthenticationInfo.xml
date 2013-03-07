@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Qwer\UserBundle\Entity\AuthenticationInfo" >
+        <property name="login" type="string" />
+        <property name="password" type="string" />
+    </class>
+</serializer>

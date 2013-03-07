@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="Qwer\UserBundle\Entity\RegistrationInfo">
+        <property name="login">
+            <constraint name="\Qwer\UserBundle\Validator\UserUnique" />
+            <!--<constraint name="MinLength">
+                <option name="limit">5</option>
+                <option name="message">Your name must have at least {{ limit }} characters.</option>
+            </constraint>-->
+        </property>
+        <property name="email">
+            <constraint name="Email">
+                <option name="message">The email "{{ value }}" is not a valid email.</option>
+                <option name="checkMX">true</option>
+            </constraint>
+        </property>
+        <property name="password">
+            <constraint name="NotBlank" >
+                <option name="message">Value password should not be blank.</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>
