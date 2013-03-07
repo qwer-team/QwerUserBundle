@@ -8,6 +8,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Qwer\UserBundle\Entity\User;
 use Symfony\Component\BrowserKit\Request;
+use JMS\Serializer\Serializer;
 
 /**
  * Description of UserController
@@ -23,6 +24,24 @@ class UserController extends FOSRestController
      */
     public $userManager;
 
+    /**
+     *
+     * @var \JMS\Serializer\Serializer 
+     */
+    public $serializer;
+
+    /**
+     *
+     * @var \Qwer\UserBundle\Service\UserRegistration 
+     */
+    public $registration;
+    
+    /**
+     *
+     * @var \Qwer\UserBundle\Service\UserActivation  
+     */
+    public $activation;
+
     public function getUserInfoAction($login)
     {
         $user = $this->userManager->findUserByUsername($login);
@@ -37,10 +56,33 @@ class UserController extends FOSRestController
 
     public function postNewUserAction()
     {
-        //echo "lala";
+        $type = "Qwer\UserBundle\Entity\RegistrationInfo";
+        $registrationInfo = $this->deserializeData("data", $type);
+        $user = $this->registration->createUser($registrationInfo);
+        
+        $view = $this->view($user);
+        return $this->handleView($view);
+    }
+
+    public function activateUserAction()
+    {
+        $type = "Qwer\UserBundle\Entity\ActivationInfo";
+        $activationInfo = $this->deserializeData("data", $type);
+        $user = $this->activation->activate($activationInfo);
+        
+        $view = $this->view($user);
+        return $this->handleView($view);
+    }
+
+    private function deserializeData($paramName, $type)
+    {
         $request = $this->getRequest();
-        $data = $request->get("user");
-        print_r($data);
+        $data = $request->get($paramName);
+        $format = $this->getRequest()->get("_format");
+        
+        $deserialized = $this->serializer->deserialize($data, $type, $format);
+        
+        return $deserialized;
     }
 
 }

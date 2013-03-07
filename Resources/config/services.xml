@@ -9,5 +9,38 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
+        <service id="user.registration" class="Qwer\UserBundle\Service\UserRegistration">
+            <call method="setUserManipulator">
+                <argument type="service" id="fos_user.util.user_manipulator" />
+            </call>
+            <call method="setValidator">
+                <argument type="service" id="validator" />
+            </call>
+            <call method="setAuthentication">
+                <argument type="service" id="qwer.auth"/>
+            </call>
+        </service>
+        <service id="user.activation" class="Qwer\UserBundle\Service\UserRegistration">
+            <call method="setUserManipulator">
+                <argument type="service" id="fos_user.util.user_manipulator" />
+            </call>
+            <call method="setAuthentication">
+                <argument type="service" id="qwer.auth"/>
+            </call>
+        </service>
+        <service id="user.unique.validator.service" class="Qwer\UserBundle\Validator\UserUniqueValidator">
+            <call method="setUserMananger">
+                <argument type="service" id="fos_user.user_manager"/>
+            </call>
+            <tag name="validator.constraint_validator" alias="user.unique.validator" />
+        </service>
+        <service id="qwer.auth" class="Qwer\UserBundle\Service\Authentication">
+            <call method="setEncoderFactory">
+                <argument type="service" id="security.encoder_factory"/>
+            </call>
+            <call method="setUserManager">
+                <argument type="service" id="fos_user.user_manager"/>
+            </call>
+        </service>
     </services>
 </container>
