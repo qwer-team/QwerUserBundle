@@ -22,6 +22,12 @@ class Authentication
      */
     private $encoderFactory;
 
+    /**
+     * 
+     * @param \Qwer\UserBundle\Entity\AuthenticationInfo $info
+     * @return \Qwer\UserBundle\Entity\User
+     * @throws ResourceNotFoundException
+     */
     public function authenticate(AuthenticationInfo $info)
     {
         $login = $info->getLogin();
@@ -45,12 +51,20 @@ class Authentication
         return $user;
     }
 
+    /**
+     * 
+     * @param \FOS\UserBundle\Model\UserManagerInterface $userManager
+     */
     public function setUserManager(UserManagerInterface $userManager)
     {
         $this->userManager = $userManager;
     }
 
-    public function setEncoderFactory($encoderFactory)
+    /**
+     * 
+     * @param \Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface $encoderFactory
+     */
+    public function setEncoderFactory(EncoderFactoryInterface $encoderFactory)
     {
         $this->encoderFactory = $encoderFactory;
     }

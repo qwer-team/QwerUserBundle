@@ -11,18 +11,19 @@ use FOS\UserBundle\Entity\Group as FOSGroup;
 class Group extends FOSGroup
 {
     /**
-     * @var integer
-     */
-    protected $id;
-
-
-    /**
-     * Get id
      *
-     * @return integer 
+     * @var string 
      */
-    public function getId()
+    private $description;
+    
+    public function getDescription()
     {
-        return $this->id;
+        return $this->description;
     }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
 }

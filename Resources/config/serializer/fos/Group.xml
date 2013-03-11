@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="FOS\UserBundle\Model\Group">
+        <property name="id" exclude="false" />
+        <property name="roles">
+            <type><![CDATA[array<string>]]></type>
+            <xml-list inline="false" entry-name="role"/>
+        </property>
+    </class>
+</serializer>
+

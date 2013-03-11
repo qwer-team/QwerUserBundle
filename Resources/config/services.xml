@@ -20,7 +20,7 @@
                 <argument type="service" id="qwer.auth"/>
             </call>
         </service>
-        <service id="user.activation" class="Qwer\UserBundle\Service\UserRegistration">
+        <service id="user.activation" class="Qwer\UserBundle\Service\UserActivation">
             <call method="setUserManipulator">
                 <argument type="service" id="fos_user.util.user_manipulator" />
             </call>
@@ -28,11 +28,25 @@
                 <argument type="service" id="qwer.auth"/>
             </call>
         </service>
-        <service id="user.unique.validator.service" class="Qwer\UserBundle\Validator\UserUniqueValidator">
+        <service id="role_manager" class="Qwer\UserBundle\Service\RoleManager">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
+            <call method="setAuthentication">
+                <argument type="service" id="qwer.auth"/>
+            </call>
+        </service>
+        <service id="username.unique.validator.service" class="Qwer\UserBundle\Validator\UserUniqueValidator">
             <call method="setUserMananger">
                 <argument type="service" id="fos_user.user_manager"/>
             </call>
             <tag name="validator.constraint_validator" alias="user.unique.validator" />
+        </service>
+        <service id="email.unique.validator.service" class="Qwer\UserBundle\Validator\EmailUniqueValidator">
+            <call method="setUserMananger">
+                <argument type="service" id="fos_user.user_manager"/>
+            </call>
+            <tag name="validator.constraint_validator" alias="email.unique.validator" />
         </service>
         <service id="qwer.auth" class="Qwer\UserBundle\Service\Authentication">
             <call method="setEncoderFactory">
@@ -41,6 +55,33 @@
             <call method="setUserManager">
                 <argument type="service" id="fos_user.user_manager"/>
             </call>
+        </service>
+        <service id="group_manipulator" class="Qwer\UserBundle\Validator\GroupManipulator">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <call method="setAuthentication">
+                <argument type="service" id="qwer.auth"/>
+            </call>
+            <call method="setValidator">
+                <argument type="service" id="validator" />
+            </call>
+            <call method="setDispatcher">
+                <argument type="service" id="event_dispatcher" />
+            </call>
+        </service>
+        <service id="update.group.listener" class="Qwer\UserBundle\Listener\UpdateGroupListener">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
+            <tag name="kernel.event_listener" event="remove.group.event" method="onEvent" />
+            <tag name="kernel.event_listener" event="update.group.event" method="onEvent" />
+        </service>
+        <service id="remove.group.listener"  class="Qwer\UserBundle\Listener\RemoveGroupListener">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
+            <tag name="kernel.event_listener" event="remove.group.event" method="onEvent" />
         </service>
     </services>
 </container>

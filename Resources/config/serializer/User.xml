@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Qwer\UserBundle\Entity\User">
+        <property name="groups">
+            <xml-list inline="false" entry-name="group"/>
+        </property>
+    </class>
+</serializer>
