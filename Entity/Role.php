@@ -4,6 +4,8 @@ namespace Qwer\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\RoleInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Role
  */
@@ -26,6 +28,22 @@ class Role implements RoleInterface
     private $parent;
 
     /**
+     *
+     * @var integer 
+     */
+    private $parentId;
+    
+    private $users;
+    
+    private $groups;
+    
+    function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->groups = new ArrayCollection();
+    }
+
+        /**
      * Get id
      *
      * @return integer 
@@ -67,6 +85,7 @@ class Role implements RoleInterface
     public function setParent(Role $parent)
     {
         $this->parent = $parent;
+        $this->parentId = $parent->getId();
 
         return $this;
     }
@@ -89,6 +108,47 @@ class Role implements RoleInterface
     public function getRole()
     {
         return $this->getName();
+    }
+
+    /**
+     * 
+     * @return integer
+     */
+    public function getParentId()
+    {
+        return $this->parentId;
+    }
+
+    /**
+     * 
+     * @param integer $parentId
+     * @return \Qwer\UserBundle\Entity\Role
+     */
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
+
+        return $this;
+    }
+
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    public function setUsers($users)
+    {
+        $this->users = $users;
+    }
+
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    public function setGroups($groups)
+    {
+        $this->groups = $groups;
     }
 
 }

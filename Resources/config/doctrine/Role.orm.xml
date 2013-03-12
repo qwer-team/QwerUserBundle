@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Qwer\UserBundle\Entity\Role" table="qwer_roles">
+    <entity name="Qwer\UserBundle\Entity\Role" table="qwer_roles" repository-class="Qwer\UserBundle\Entity\RoleRepository">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
@@ -8,5 +8,8 @@
         <many-to-one target-entity="Qwer\UserBundle\Entity\Role" field="parent">
             <join-column name="parent_id" nullable="true"/>
         </many-to-one>
+        <field name="parentId" column="parent_id" type="integer" nullable="true"/>
+        <many-to-many field="users" mapped-by="roleObjects" target-entity="Qwer\UserBundle\Entity\User"/>
+        <many-to-many field="groups" mapped-by="roleObjects" target-entity="Qwer\UserBundle\Entity\Group"/>
     </entity>
 </doctrine-mapping>

@@ -3,6 +3,7 @@
 namespace Qwer\UserBundle\Listener;
 
 use Doctrine\ORM\EntityManager;
+use Qwer\UserBundle\Event\GroupEvent;
 
 class RemoveGroupListener
 {

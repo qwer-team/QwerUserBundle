@@ -4,11 +4,15 @@ namespace Qwer\UserBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Validator\Validator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 use Doctrine\ORM\EntityRepository;
+
 use Qwer\UserBundle\Entity\GroupInfo;
 use Qwer\UserBundle\Entity\Group;
+use Qwer\UserBundle\Entity\AuthenticationInfo;
 use Qwer\UserBundle\Event\GroupEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class GroupManipulator extends ContainerAware
 {
@@ -59,12 +63,11 @@ class GroupManipulator extends ContainerAware
             throw new \Exception($message);
         }
         
-        $group = new Group();
-        $group->setName($name);
+        $group = new Group($name);
         $group->setDescription($description);
         
         $event = new GroupEvent($group);
-        $this->dispatcher->dispatch("group.create.event", $event);
+        $this->dispatcher->dispatch("create.group.event", $event);
 
         return $group;
     }
@@ -96,7 +99,7 @@ class GroupManipulator extends ContainerAware
         $group->setDescription($description);
         
         $event = new GroupEvent($group);
-        $this->dispatcher->dispatch("group.update.event", $event);
+        $this->dispatcher->dispatch("update.group.event", $event);
         
         return $group;
     }
@@ -111,7 +114,7 @@ class GroupManipulator extends ContainerAware
         $this->authentication->authenticate($auth);
         
         $event = new GroupEvent($group);
-        $this->dispatcher->dispatch("group.remove.event", $event);
+        $this->dispatcher->dispatch("remove.group.event", $event);
     }
 
     /**

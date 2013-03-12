@@ -4,5 +4,6 @@
         <property name="groups">
             <xml-list inline="false" entry-name="group"/>
         </property>
+        <property name="roleObjects" exclude="true"/>
     </class>
 </serializer>

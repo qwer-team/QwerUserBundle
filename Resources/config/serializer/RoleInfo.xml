@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
-    <class name="Qwer\UserBundle\Entity\RoleInfo" >
-        <property name="roles">
-            <type><![CDATA[array<string>]]></type>
-            <xml-list inline="false" entry-name="role"/>
-        </property>
+    <class name="Qwer\UserBundle\Entity\RoleInfo" exclusion-policy="none" >
+        <property name="role" type="string" />
+        <property name="id" type="integer" />
+        <property name="parentId" type="integer" />
     </class>
 </serializer>

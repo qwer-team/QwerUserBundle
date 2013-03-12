@@ -2,26 +2,87 @@
 
 namespace Qwer\UserBundle\Entity;
 
-use Qwer\UserBundle\Entity\AbstractAuthenticatedEntity;
-
 class RoleInfo extends AbstractAuthenticatedEntity
 {
-
-    private $roles = array();
-
-    public function getRoles()
+    /**
+     *
+     * @var integer 
+     */
+    private $id;
+    
+    /**
+     *
+     * @var string 
+     */
+    private $role;
+    
+    /**
+     *
+     * @var integer 
+     */
+    private $parentId;
+    
+    /**
+     * 
+     * @return integer
+     */
+    public function getId()
     {
-        return $this->roles;
+        return $this->id;
     }
 
-    public function setRoles($roles)
+    /**
+     * 
+     * @param integer $id
+     * @return \Qwer\UserBundle\Entity\RoleInfo
+     */
+    public function setId($id)
     {
-        $this->roles = $roles;
+        $this->id = $id;
+        
+        return $this;
     }
 
-    public function addRole($role)
+    /**
+     * 
+     * @return string
+     */
+    public function getRole()
     {
-        $this->roles[] = $role;
+        return $this->role;
+    }
+
+    /**
+     * 
+     * @param string $role
+     * @return \Qwer\UserBundle\Entity\RoleInfo
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+        
+        return $this;
+    }
+
+    /**
+     * 
+     * @return integer
+     */
+    public function getParentId()
+    {
+        return $this->parentId;
+    }
+
+    /**
+     * 
+     * @param integer $parentId
+     * @return \Qwer\UserBundle\Entity\RoleInfo
+     */
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
+        
+        return $this;
     }
 
 }

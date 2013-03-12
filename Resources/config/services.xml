@@ -35,16 +35,19 @@
             <call method="setAuthentication">
                 <argument type="service" id="qwer.auth"/>
             </call>
+            <call method="setDispatcher">
+                <argument type="service" id="event_dispatcher" />
+            </call>
         </service>
         <service id="username.unique.validator.service" class="Qwer\UserBundle\Validator\UserUniqueValidator">
             <call method="setUserMananger">
-                <argument type="service" id="fos_user.user_manager"/>
+                <argument type="service" id="qwer.user_manager"/>
             </call>
             <tag name="validator.constraint_validator" alias="user.unique.validator" />
         </service>
         <service id="email.unique.validator.service" class="Qwer\UserBundle\Validator\EmailUniqueValidator">
             <call method="setUserMananger">
-                <argument type="service" id="fos_user.user_manager"/>
+                <argument type="service" id="qwer.user_manager"/>
             </call>
             <tag name="validator.constraint_validator" alias="email.unique.validator" />
         </service>
@@ -53,10 +56,10 @@
                 <argument type="service" id="security.encoder_factory"/>
             </call>
             <call method="setUserManager">
-                <argument type="service" id="fos_user.user_manager"/>
+                <argument type="service" id="qwer.user_manager"/>
             </call>
         </service>
-        <service id="group_manipulator" class="Qwer\UserBundle\Validator\GroupManipulator">
+        <service id="group_manipulator" class="Qwer\UserBundle\Service\GroupManipulator">
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
@@ -74,7 +77,7 @@
             <call method="setEntityManager">
                 <argument type="service" id="doctrine.orm.entity_manager" />
             </call>
-            <tag name="kernel.event_listener" event="remove.group.event" method="onEvent" />
+            <tag name="kernel.event_listener" event="create.group.event" method="onEvent" />
             <tag name="kernel.event_listener" event="update.group.event" method="onEvent" />
         </service>
         <service id="remove.group.listener"  class="Qwer\UserBundle\Listener\RemoveGroupListener">
@@ -82,6 +85,25 @@
                 <argument type="service" id="doctrine.orm.entity_manager" />
             </call>
             <tag name="kernel.event_listener" event="remove.group.event" method="onEvent" />
+        </service>
+        <service id="create.role.listener"  class="Qwer\UserBundle\Listener\CreateRoleListener">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
+            <tag name="kernel.event_listener" event="create.role.event" method="onEvent" />
+        </service>
+        <service id="remove.role.listener"  class="Qwer\UserBundle\Listener\RemoveRoleListener">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
+            <tag name="kernel.event_listener" event="remove.role.event" method="onEvent" />
+        </service>
+        <service id="qwer.user_manager" class="Qwer\UserBundle\Service\UserManager">
+            <argument type="service" id="security.encoder_factory" />
+            <argument type="service" id="fos_user.util.username_canonicalizer" />
+            <argument type="service" id="fos_user.util.email_canonicalizer" />
+            <argument type="service" id="fos_user.entity_manager" />
+            <argument>%fos_user.model.user.class%</argument>
         </service>
     </services>
 </container>

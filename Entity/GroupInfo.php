@@ -4,23 +4,25 @@ namespace Qwer\UserBundle\Entity;
 
 class GroupInfo extends AbstractAuthenticatedEntity
 {
+
     /**
      *
      * @var integer 
      */
     private $id;
+
     /**
      *
      * @var string 
      */
     private $name;
-    
+
     /**
      *
      * @var string 
      */
     private $description;
-    
+
     public function getName()
     {
         return $this->name;
@@ -40,7 +42,7 @@ class GroupInfo extends AbstractAuthenticatedEntity
     {
         $this->description = $description;
     }
-    
+
     public function getId()
     {
         return $this->id;

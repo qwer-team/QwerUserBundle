@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
-    <class name="FOS\UserBundle\Model\Group">
-        <property name="id" exclude="false" />
+    <class name="Qwer\UserBundle\Entity\RolesInfo" >
         <property name="roles">
-            <type><![CDATA[array<string>]]></type>
+            <type><![CDATA[array<integer>]]></type>
             <xml-list inline="false" entry-name="role"/>
         </property>
     </class>
