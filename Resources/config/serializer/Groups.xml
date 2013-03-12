@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Qwer\UserBundle\Entity\Groups" >
+        <property name="groups">
+            <type><![CDATA[array<Qwer\UserBundle\Entity\Group>]]></type>
+            <xml-list inline="false" entry-name="group"/>
+        </property>
+    </class>
+</serializer>

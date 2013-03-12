@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Qwer\UserBundle\Entity\Roles" >
+        <property name="roles">
+            <type><![CDATA[array<Qwer\UserBundle\Entity\Role>]]></type>
+            <xml-list inline="false" entry-name="role"/>
+        </property>
+    </class>
+</serializer>

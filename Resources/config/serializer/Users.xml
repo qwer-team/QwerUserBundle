@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Qwer\UserBundle\Entity\Users" >
+        <property name="users">
+            <type><![CDATA[array<Qwer\UserBundle\Entity\User>]]></type>
+            <xml-list inline="false" entry-name="user"/>
+        </property>
+    </class>
+</serializer>
