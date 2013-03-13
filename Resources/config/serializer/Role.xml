@@ -2,5 +2,8 @@
 <serializer>
     <class name="Qwer\UserBundle\Entity\Role" exclusion-policy="none" >
         <property name="parent" exclude="true" />
+        <property name="users" exclude="true"/>
+        <property name="groups" exclude="true"/>
     </class>
 </serializer>
+
