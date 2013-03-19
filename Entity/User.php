@@ -113,6 +113,9 @@ class User extends FOSUser
 
     public function removeRole($role)
     {
+        if(is_string($role)) {
+            return $this;
+        }
         $this->removeRoleObject($role);
         $rolename = $role->getRole();
         parent::removeRole($rolename);

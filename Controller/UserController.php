@@ -59,7 +59,6 @@ class UserController extends RestController
 
     /**
      * Exception message.
-     * @DI\Inject("qwer.user_manager")
      * @var string 
      */
     private $userNotFoundMessage = "User %s was not found.";

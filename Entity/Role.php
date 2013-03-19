@@ -25,13 +25,13 @@ class Role implements RoleInterface
     /**
      * @var Role
      */
-    private $parent;
+    private $parent = null;
 
     /**
      *
      * @var integer 
      */
-    private $parentId;
+    private $parentId = null;
     
     private $users;
     

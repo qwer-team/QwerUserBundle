@@ -105,5 +105,15 @@
             <argument type="service" id="fos_user.entity_manager" />
             <argument>%fos_user.model.user.class%</argument>
         </service>
+        <service id="token_hash_generator" class="Qwer\UserBundle\Service\TokenHashGenerator"/>
+        <service id="generate.token.listener"  class="Qwer\UserBundle\Listener\GenerateTokenListener">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
+            <call method="setTokenHashGenerator">
+                <argument type="service" id="token_hash_generator" />
+            </call>
+            <tag name="kernel.event_listener" event="generate.token.event" method="onEvent" />
+        </service>
     </services>
 </container>

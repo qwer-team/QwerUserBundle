@@ -14,7 +14,6 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Qwer\UserBundle\Entity\AuthenticationInfo;
 
-
 class RoleManager
 {
 
@@ -35,7 +34,7 @@ class RoleManager
      * @var \Doctrine\ORM\EntityRepository 
      */
     private $roleRepo;
-    
+
     /**
      *
      * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface 
@@ -45,25 +44,28 @@ class RoleManager
     public function createRole(RoleInfo $info)
     {
         $this->authentication->authenticate($info->getAuthenticationInfo());
-        
+
         $role = new Role();
         $parentId = $info->getParentId();
         $rolename = $info->getRole();
         $parentRole = $this->find($parentId);
+
+        if(!is_null($parentRole)) {
+            $role->setParent($parentRole);
+        }
         
-        $role->setParent($parentRole);
         $role->setName($rolename);
-        
+
         $event = new RoleEvent($role);
         $this->dispatcher->dispatch("create.role.event", $event);
-        
+
         return $role;
     }
 
     public function removeRole(Role $role, AuthenticationInfo $info)
     {
         $this->authentication->authenticate($info);
-        
+
         $event = new RoleEvent($role);
         $this->dispatcher->dispatch("remove.role.event", $event);
     }
@@ -134,7 +136,7 @@ class RoleManager
     {
         $this->authentication = $authentication;
     }
-    
+
     public function setDispatcher($dispatcher)
     {
         $this->dispatcher = $dispatcher;
@@ -152,6 +154,9 @@ class RoleManager
 
     public function find($id)
     {
+        if (is_null($id)) {
+            return null;
+        }
         return $this->roleRepo->find($id);
     }
 

@@ -1,0 +1,111 @@
+<?php
+
+namespace Qwer\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Token
+ */
+class Token
+{
+    /**
+     * @var string
+     */
+    private $token;
+
+    /**
+     * @var integer
+     */
+    private $externalId;
+
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \Qwer\UserBundle\Entity\User
+     */
+    private $user;
+
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set externalId
+     *
+     * @param integer $externalId
+     * @return Token
+     */
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+    
+        return $this;
+    }
+
+    /**
+     * Get externalId
+     *
+     * @return integer 
+     */
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Qwer\UserBundle\Entity\User $user
+     * @return Token
+     */
+    public function setUser(\Qwer\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Qwer\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}
