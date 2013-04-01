@@ -7,11 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class TokenControllerTest extends WebTestCase
 {
 
-    private $format     = "json";
+    private $format = "json";
     private $externalId = 11;
-    private $user       = "rasom";
-    private $password   = "123";
-    
+    private $user = "rasom";
+    private $password = "123";
+
     public function testGetTokenAction()
     {
         $client = static::createClient();
@@ -22,14 +22,16 @@ class TokenControllerTest extends WebTestCase
         $auth->setLogin($this->user);
         $auth->setPassword($this->password);
         $serializer = $this->getSerializer();
-        
+
         $data = $serializer->serialize($auth, $this->format);
         $parameters["data"] = $data;
-        
+
         $url = sprintf('/api/tokens/%s.%s', $this->externalId, $this->format);
         $crawler = $client->request('POST', $url);
 
-        $crawler->filter("token");
+        $token = $crawler->filter("token");
+
+        //print_r($token->text());
     }
 
     /**
@@ -39,11 +41,11 @@ class TokenControllerTest extends WebTestCase
     private function getSerializer()
     {
         $serializer = self::$kernel->getContainer()->get("jms_serializer");
-        
+
         return $serializer;
     }
 
-    public function testCompleteScenario()
+    public function tesCompleteScenario()
     {
         // Create a new client to browse the application
         $client = static::createClient();

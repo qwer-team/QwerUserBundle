@@ -26,7 +26,7 @@ class GenerateTokenListener
         $token = $event->getToken();
 
         $hash = $this->tokenHashGenerator->generate($user, $token);
-        if (new \DateTime() > $token->getExpiresAt()) {
+        if (new \DateTime() > $token->getExpiresAt() || is_null($token->getExpiresAt())) {
             $token->setToken($hash);
         }
         $token->updateExpireDate();

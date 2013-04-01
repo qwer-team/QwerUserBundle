@@ -32,7 +32,7 @@ class Token
 
     public function __construct()
     {
-        $this->updateExpireDate();
+        //$this->updateExpireDate();
     }
 
     public function updateExpireDate()
