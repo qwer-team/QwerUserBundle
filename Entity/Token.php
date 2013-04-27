@@ -29,6 +29,12 @@ class Token
      * @var \Qwer\UserBundle\Entity\User
      */
     private $user;
+    
+    /**
+     *
+     * @var \Qwer\LottoDocumentsBundle\Entity\Currency 
+     */
+    private $currency;
 
     public function __construct()
     {
@@ -149,6 +155,29 @@ class Token
     public function getExpiresAt()
     {
         return $this->expiresAt;
+    }
+
+    /**
+     * 
+     * @return \Qwer\LottoBundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->getUser()->getClient();
+    }
+
+    /**
+     * 
+     * @return \Qwer\LottoDocumentsBundle\Entity\Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
 }

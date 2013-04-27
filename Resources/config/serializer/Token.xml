@@ -4,6 +4,7 @@
         <property name="externalId" type="string" />
         <property name="token" serialized-by="hash" />
         <property name="user" exclude="true" />
-        <property name="expiresAt" type="datetime"/>
+        <property name="currency" exclude="true" />
+        <property name="expiresAt" type="DateTime"/>
     </class>
 </serializer>

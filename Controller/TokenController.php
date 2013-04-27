@@ -27,18 +27,22 @@ class TokenController extends RestController
      */
     public $entityManager;
 
-    public function postTokenAction($externalId)
+    public function postTokenCurrencyAction($externalId, $currency)
     {
+
         $type = "Qwer\UserBundle\Entity\AuthenticationInfo";
         $info = $this->deserializeData($type);
 
         $user = $this->authentication->authenticate($info);
 
         $token = $this->findToken($user, $externalId);
-        if(!$token){
+        if (!$token) {
+            $currencyRepo = $this->getCurrencyRepo();
+            $currency = $currencyRepo->findOneByCode($currency);
             $token = new Token();
             $token->setUser($user);
             $token->setExternalId($externalId);
+            $token->setCurrency($currency);
         }
 
         $event = new TokenEvent($user, $token);
@@ -51,14 +55,14 @@ class TokenController extends RestController
     private function findToken($user, $externalId)
     {
         $repo = $this->getTokenRepo();
-        
+
         $criteria = array(
-                "user" => $user, 
-                "externalId" => $externalId
+            "user" => $user,
+            "externalId" => $externalId
         );
-        
+
         $token = $repo->findOneBy($criteria);
-        
+
         return $token;
     }
 
@@ -72,6 +76,14 @@ class TokenController extends RestController
         $tokenRepo = $this->entityManager->getRepository($namespace);
 
         return $tokenRepo;
+    }
+
+    private function getCurrencyRepo()
+    {
+        $namespace = "QwerLottoDocumentsBundle:Currency";
+        $curRepo = $this->entityManager->getRepository($namespace);
+
+        return $curRepo;
     }
 
 }

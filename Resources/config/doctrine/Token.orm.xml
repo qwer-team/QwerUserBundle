@@ -7,6 +7,9 @@
         <field name="token" type="string" column="token" length="255" nullable="false"/>
         <field name="externalId" type="integer" column="external_id" nullable="false"/>
         <field name="expiresAt" type="datetime" column="expires_at" nullable="false"/>
+        <many-to-one target-entity="Qwer\LottoDocumentsBundle\Entity\Currency" field="currency">
+            <join-column name="currency_id"></join-column>
+        </many-to-one>
         <many-to-one target-entity="Qwer\UserBundle\Entity\User" field="user">
             <join-column name="user_id" referenced-column-name="id" nullable="false" />
         </many-to-one>

@@ -27,6 +27,12 @@ class User extends FOSUser
      * @var \Doctrine\Common\Collections\ArrayCollection 
      */
     protected $roleObjects;
+    
+    /**
+     *
+     * @var type 
+     */
+    protected $client;
 
     public function __construct()
     {
@@ -119,6 +125,16 @@ class User extends FOSUser
         $this->removeRoleObject($role);
         $rolename = $role->getRole();
         parent::removeRole($rolename);
+    }
+
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    public function setClient($client)
+    {
+        $this->client = $client;
     }
 
 }

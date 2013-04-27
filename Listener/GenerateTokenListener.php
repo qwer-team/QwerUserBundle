@@ -24,13 +24,12 @@ class GenerateTokenListener
     {
         $user = $event->getUser();
         $token = $event->getToken();
-
-        $hash = $this->tokenHashGenerator->generate($user, $token);
+        
         if (new \DateTime() > $token->getExpiresAt() || is_null($token->getExpiresAt())) {
+            $hash = $this->tokenHashGenerator->generate($user, $token);
             $token->setToken($hash);
         }
         $token->updateExpireDate();
-
         $this->em->persist($token);
         $this->em->flush();
     }
