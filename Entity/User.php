@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  */
-class User extends FOSUser
+abstract class User extends FOSUser
 {
 
     /**
