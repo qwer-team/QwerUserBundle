@@ -33,13 +33,15 @@ class TokenController extends RestController
         $type = "Qwer\UserBundle\Entity\AuthenticationInfo";
         $info = $this->deserializeData($type);
 
+        //$user = $this->getDoctrine()->getRepository('QwerLottoBundle:User')->find(1);//
         $user = $this->authentication->authenticate($info);
 
         $token = $this->findToken($user, $externalId);
         if (!$token) {
             $currencyRepo = $this->getCurrencyRepo();
             $currency = $currencyRepo->findOneByCode($currency);
-            $token = new Token();
+            $class = $this->get('service_container')->getParameter('users.token_class');
+            $token = new $class();
             $token->setUser($user);
             $token->setExternalId($externalId);
             $token->setCurrency($currency);
@@ -72,8 +74,8 @@ class TokenController extends RestController
      */
     private function getTokenRepo()
     {
-        $namespace = "QwerUserBundle:Token";
-        $tokenRepo = $this->entityManager->getRepository($namespace);
+        $class = $this->get('service_container')->getParameter('users.token_class');
+        $tokenRepo = $this->entityManager->getRepository($class);
 
         return $tokenRepo;
     }

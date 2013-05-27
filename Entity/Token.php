@@ -7,34 +7,34 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Token
  */
-class Token
+abstract class Token
 {
 
     /**
      * @var string
      */
-    private $token;
+    protected $token;
 
     /**
      * @var integer
      */
-    private $externalId;
+    protected $externalId;
 
     /**
      * @var integer
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \Qwer\UserBundle\Entity\User
      */
-    private $user;
+    protected $user;
     
     /**
      *
      * @var \Qwer\LottoDocumentsBundle\Entity\Currency 
      */
-    private $currency;
+    protected $currency;
 
     public function __construct()
     {
@@ -132,7 +132,7 @@ class Token
     /**
      * @var \DateTime
      */
-    private $expiresAt;
+    protected $expiresAt;
 
     /**
      * Set expiresAt
