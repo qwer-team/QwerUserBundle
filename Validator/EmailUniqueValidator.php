@@ -38,5 +38,11 @@ class EmailUniqueValidator extends ConstraintValidator
     {
         $this->userMananger = $userMananger;
     }
+    
+    
+    public function validate($value, Constraint $constraint)
+    {
+        $this->isValid($value, $constraint);
+    }
 
 }
