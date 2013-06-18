@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
     <class name="FOS\UserBundle\Model\User" exclusion-policy="none">
-        <property name="password" exclude="true" />
-        <property name="salt" exclude="true" />
+        <!--<property name="password" exclude="true" />
+        <property name="salt" exclude="true" />-->
         <property name="usernameCanonical" exclude="true" />
         <property name="emailCanonical" exclude="true" />
     </class>
