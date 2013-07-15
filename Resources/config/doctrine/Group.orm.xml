@@ -5,7 +5,7 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="description" type="string" nullable="true"/>
-        <many-to-many target-entity="Qwer\UserBundle\Entity\Role" field="roleObjects">
+        <many-to-many target-entity="Qwer\UserBundle\Entity\Role" field="roleObjects" inversed-by="groups">
             <join-table name="qwer_groups_roles">
                 <join-columns>
                     <join-column name="group_id" referenced-column-name="id" nullable="false" unique="false" />

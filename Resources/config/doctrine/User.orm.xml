@@ -6,7 +6,7 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
-        <many-to-many target-entity="Qwer\UserBundle\Entity\Role" field="roleObjects">
+        <!--<many-to-many target-entity="Qwer\UserBundle\Entity\Role" field="roleObjects" inversed-by="users">
             <join-table name="qwer_users_roles">
                 <join-columns>
                     <join-column name="user_id" referenced-column-name="id" nullable="false" unique="false" />
@@ -26,7 +26,7 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <!--<one-to-one field="client" target-entity="Qwer\LottoBundle\Entity\Client">
+        <one-to-one field="client" target-entity="Qwer\LottoBundle\Entity\Client">
             <join-column name="client_id" nullable="true"/>
         </one-to-one>-->
     </mapped-superclass>
