@@ -20,7 +20,8 @@ class RestController extends FOSRestController
         $request = $this->getRequest();
         $data = $request->get($paramName);
         $format = $this->getRequest()->get("_format");
-
+        // return($data." -- ".$type." -- ".$format);
+       // $deserialized = $this->serializer->deserialize('{"login":"vassa","password":"123"}', "Qwer\\UserBundle\\Entity\\AuthenticationInfo", "json");
         $deserialized = $this->serializer->deserialize($data, $type, $format);
 
         return $deserialized;

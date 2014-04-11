@@ -31,8 +31,9 @@ class TokenController extends RestController
     {
 
         $type = "Qwer\UserBundle\Entity\AuthenticationInfo";
+        //  print_r($type);
         $info = $this->deserializeData($type);
-
+    //    print_r($info);
         //$user = $this->getDoctrine()->getRepository('QwerLottoBundle:User')->find(1);//
         $user = $this->authentication->authenticate($info);
 
