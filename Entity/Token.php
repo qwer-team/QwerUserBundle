@@ -19,6 +19,11 @@ abstract class Token
      * @var integer
      */
     protected $externalId;
+    
+    /**
+     * @var string
+     */
+    protected $externalLogin;
 
     /**
      * @var integer
@@ -94,6 +99,29 @@ abstract class Token
     public function getExternalId()
     {
         return $this->externalId;
+    }
+    
+    /**
+     * Set token
+     *
+     * @param string $externalLogin
+     * @return Token
+     */
+    public function setExternalLogin($externalLogin)
+    {
+        $this->externalLogin = $externalLogin;
+
+        return $this;
+    }
+
+    /**
+     * Get externalLogin
+     *
+     * @return string 
+     */
+    public function getExternalLogin()
+    {
+        return $this->externalLogin;
     }
 
     /**

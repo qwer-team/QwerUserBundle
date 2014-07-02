@@ -52,6 +52,7 @@ class TokenController extends RestController
         $this->dispatcher->dispatch("generate.token.event", $event);
 
         $view = $this->view($token);
+    //    print($view);
         return $this->handleView($view);
     }
 
